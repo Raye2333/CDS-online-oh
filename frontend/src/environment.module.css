@@ -1,0 +1,25 @@
+.container {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.cards {
+  padding: 30px;
+}
+
+.links {
+  text-decoration: none;
+  color: black;
+}
+
+.card {
+  display: grid;
+  overflow: auto;
+  flex-direction: row;
+  height: 200px;
+}
+
+.alignment{
+  text-align: center;
+}
+

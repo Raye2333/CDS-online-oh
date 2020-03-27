@@ -7,10 +7,10 @@ import Divider from '@material-ui/core/Divider';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import Icon from '@material-ui/core/Icon';
+
 import { CardActionArea, CardContent } from '@material-ui/core';
-import Course from './course'
+import Course from './course';
+import styles from './environment.module.css';
 
 import {
   BrowserRouter as Router,
@@ -19,42 +19,10 @@ import {
   Link
 } from "react-router-dom";
 
-function preventDefault(event) {
-  event.preventDefault();
-}
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-  card: {
-    justifyContent: 'center',
-    display: 'grid',
-    overflow: 'auto',
-    flexDirection: 'column',
-  },
-  fixedHeight: {
-    height: 200,
-  },
-  add: {
-    marginTop: 80,
-  },
-  class: {
-    marginTop: 50,
-  },
-  cards: {
-    padding: theme.spacing(5),
-  },
-  link: {
-    textDecoration: 'none',
-    color: 'black',
-  },
-}));
 
 
 export default function Classes() {
-  const classes = useStyles();
   return (
     <Router>
       <Switch>
@@ -62,28 +30,28 @@ export default function Classes() {
           <Course />
         </Route>
         <Route path="/">
-          <Container maxWidth="lg" className={classes.container}>
+          <Container maxWidth="lg" className={styles.container}>
             <Typography component="p" variant="h4">
               Active Courses
-      </Typography>
+            </Typography>
             <Divider orientation="horizontal" variant="fullWidth" />
             <Grid container spacing={1} xs={12}>
               <Grid item spacing={3} xs={4} >
-                <div className={classes.cards}>
-                  <Link to="/course" className={classes.link}>
+                <div className={styles.cards}>
+                  <Link className={styles.links} to="/course" >
                     <ClassCard />
                   </Link>
                 </div>
               </Grid>
               <Grid item spacing={3} xs={4} >
-                <div className={classes.cards}>
+                <div className={styles.cards}>
                   <AddClass />
                 </div>
               </Grid>
             </Grid>
             <Typography component="p" variant="h4">
               Inactive Courses
-      </Typography>
+            </Typography>
             <Divider orientation="horizontal" variant="fullWidth" />
           </Container>
         </Route>
@@ -93,18 +61,16 @@ export default function Classes() {
 }
 
 function ClassCard() {
-  const classes = useStyles();
-  const fixedHeightCard = clsx(classes.card, classes.fixedHeight);
   return (
     <React.Fragment>
       <Card variant="outlined">
-        <CardActionArea className={fixedHeightCard}>
-          <CardContent>
-            <Typography className={classes.class}>CS 2110</Typography>
-            <Typography color="textSecondary" className={classes.depositContext}>
+        <CardActionArea className={styles.card}>
+          <CardContent className={styles.alignment}>
+            <Typography>CS 2110</Typography>
+            <Typography color="textSecondary">
               Spring 2020
             </Typography>
-            <Typography color="textSecondary" className={classes.depositContext}>
+            <Typography color="textSecondary">
               Enrolled as Student
       </Typography>
           </CardContent>
@@ -114,15 +80,13 @@ function ClassCard() {
   );
 }
 function AddClass() {
-  const classes = useStyles();
-  const fixedHeightCard = clsx(classes.card, classes.fixedHeight);
 
   return (
     <React.Fragment>
       <Card variant="outlined">
-        <CardActionArea className={fixedHeightCard}>
-          <CardContent >
-            <Typography className={classes.add}>Click to Add a Course</Typography>
+        <CardActionArea className={styles.card}>
+          <CardContent className={styles.alignment}>
+            <Typography>Click to Add a Course</Typography>
           </CardContent>
         </CardActionArea>
       </Card>

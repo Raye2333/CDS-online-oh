@@ -17,7 +17,6 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Classes from './Classes';
 import Course from './course';
 
-
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -32,8 +31,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-
 } from "react-router-dom";
 
 
@@ -115,22 +112,10 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
     overflow: 'auto',
   },
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-
   sidebar: {
     flex: 1,
     justifyContent: 'flex-end',
-  },
-  cards: {
-    padding: theme.spacing(5),
-  },
-  link: {
-    textDecoration: 'none',
-    color: 'black',
-  },
+  }
 }));
 
 let history = createHistory();
@@ -154,7 +139,7 @@ export default function Dashboard() {
   }
   return (
     <div className={classes.root}>
-      <Router forceRefresh={true}>
+      <Router >
 
         <CssBaseline />
         <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
