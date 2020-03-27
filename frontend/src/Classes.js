@@ -87,7 +87,6 @@ export default function Classes() {
             <Divider orientation="horizontal" variant="fullWidth" />
           </Container>
         </Route>
-
       </Switch>
     </Router >
   );

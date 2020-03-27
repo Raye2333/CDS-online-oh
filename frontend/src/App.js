@@ -26,14 +26,16 @@ import HistoryIcon from '@material-ui/icons/History';
 import SettingsIcon from '@material-ui/icons/Settings';
 import HelpIcon from '@material-ui/icons/Help';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import createHistory from 'history/createBrowserHistory';
 
-import { browserHistory } from "react-router";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+
 } from "react-router-dom";
+
 
 function Copyright() {
   return (
@@ -131,11 +133,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function goHome() {
-  browserHistory.push("/");
-}
-export default function Dashboard() {
+let history = createHistory();
 
+export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -144,9 +144,17 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const NotFound = () => {
+    return (<h1>Page not found.</h1>);
+  }
+
+  const refPage = () => {
+    history.push("/");
+    history.go(0);
+  }
   return (
-    <div className={classes.root} >
-      <Router>
+    <div className={classes.root}>
+      <Router forceRefresh={true}>
 
         <CssBaseline />
         <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
@@ -181,7 +189,7 @@ export default function Dashboard() {
           open={open}
         ><div style={{ marginBottom: 150 }}>
             <List><div>
-              <ListItem button onClick={<goHome />}>
+              <ListItem button onClick={refPage}>
                 <ListItemIcon><HomeIcon /></ListItemIcon>
                 <ListItemText primary="Home" />
               </ListItem>
@@ -189,9 +197,10 @@ export default function Dashboard() {
                 <ListItemIcon><HistoryIcon /></ListItemIcon>
                 <ListItemText primary="History" />
               </ListItem>
-
-            </div></List>
+            </div>
+            </List>
           </div>
+
           <Divider />
           <List >
             <div>
@@ -219,14 +228,11 @@ export default function Dashboard() {
 
 
           <Switch>
-            <Route path="/course">
-              <div>
-                <Course />
-              </div>
+            <Route exact path="/course" component={Course}>
             </Route>
-            <Route path="/" >
-              <Classes />
+            <Route exact path="/" component={Classes} >
             </Route>
+            <Route component={NotFound}></Route>
           </Switch>
 
 
@@ -235,9 +241,9 @@ export default function Dashboard() {
             <Copyright />
           </Box>
         </main>
-      </Router>
+      </Router >
 
     </div >
+
   );
 }
-

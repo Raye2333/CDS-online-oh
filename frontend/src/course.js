@@ -30,6 +30,15 @@ import { render } from '@testing-library/react';
 export default function Course() {
 
   return (
-    <Typography>hi</Typography>
+    <Router>
+      <Switch>
+        <Route path="/course">
+          <Typography>hi</Typography>
+        </Route>
+        <Route path="/">
+          <Classes />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
