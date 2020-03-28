@@ -63,8 +63,8 @@ export default function Classes() {
 function ClassCard() {
   return (
     <React.Fragment>
-      <Card variant="outlined">
-        <CardActionArea className={styles.card}>
+      <Card variant="outlined" className={styles.card}>
+        <CardActionArea >
           <CardContent className={styles.alignment}>
             <Typography>CS 2110</Typography>
             <Typography color="textSecondary">
@@ -83,8 +83,8 @@ function AddClass() {
 
   return (
     <React.Fragment>
-      <Card variant="outlined">
-        <CardActionArea className={styles.card}>
+      <Card variant="outlined" className={styles.card}>
+        <CardActionArea >
           <CardContent className={styles.alignment}>
             <Typography>Click to Add a Course</Typography>
           </CardContent>

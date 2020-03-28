@@ -137,6 +137,7 @@ export default function Dashboard() {
     history.push("/");
     history.go(0);
   }
+
   return (
     <div className={classes.root}>
       <Router >
