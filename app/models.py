@@ -1,47 +1,41 @@
-from sqlalchemy import Table, Column, Integer, String
-from sqlalchemy.orm import mapper
-from yourapplication.database import metadata, db_session
-
-class Request(object):
-    query = db_session.query_property()
-
-    def __init__(self, net_id=None, course_id=None, time_posted=None, queue_pos=None):
-        self.net_id = net_id
-        self.course_id = course_id
-        self.time_posted = time_posted
-        self.queue_pos = queue_pos
-
-    def __repr__(self):
-        return '<Request from ' + self.net_id + ' for ' + self.course_id +\
-        ', posted ' + self.time_posted + '>'
+from sqlalchemy import Table, Column, Integer, String, ForeignKey
+from app.db import db_session, Base
+from datetime import datetime
 
 
-class User(object):
-    query = db_session.query_property()
+class Request(Base):
+  __tablename__ = 'requests'
+  id = Column(Integer, primary_key=True)
+  user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+  course_id = Column(Integer, nullable=False)
+  time_posted = Column(String, default=datetime.utcnow)
+  queue_pos = Column(Integer)
 
-    def __init__(self, net_id=None, ta_course_id=None):
-        self.net_id = net_id
-        self.ta_course_id = ta_course_id
-        self.ta_zoom_link = ta_zoom_link
+  def __init__(self, user_id=None, course_id=None, time_posted=None, queue_pos=None):
+    self.user_id = user_id
+    self.course_id = course_id
+    self.time_posted = time_posted
+    self.queue_pos = queue_pos
 
-    def __repr__(self):
-        return '<User ' + self.net_id + ', TAing' + self.ta_course_id + '>'
+  def __repr__(self):
+    return '<Request from ' + str(self.net_id) + ' for ' + str(self.course_id) +\
+    ', posted ' + str(self.time_posted) + '>'
 
 
-requests = Table('requests', metadata,
-    Column('id', Integer, primary_key=True),
-    Column('net_id', String, unique=True),
-    Column('course_id', String),
-    Column('time_posted', String),
-    Column('queue_pos', Int)
-)
+class User(Base):
+  __tablename__ = 'users'
+  id = Column(Integer, primary_key=True)
+  net_id = Column(String, unique=True, nullable=False)
+  ta_course_id = Column(Integer, nullable=True)
+  ta_zoom_link = Column(String, nullable=True)
 
-users = Table('requests', metadata,
-    Column('id', Integer, primary_key=True),
-    Column('net_id', String, unique=True),
-    Column('ta_course_id', String),
-    Column('ta_zoom_link', String)
-)
+  def __init__(self, net_id=None, ta_course_id=None, ta_zoom_link=None):
+    self.net_id = net_id
+    self.ta_course_id = ta_course_id
+    self.ta_zoom_link = ta_zoom_link
 
-mapper(Request, requests)
-mapper(User, users)
+  def __repr__(self):
+    if (self.ta_course_id is not None):
+      return '<User ' + str(self.net_id) + ', TAing' + str(self.ta_course_id) + '>'
+    else:
+      return '<User ' + str(self.net_id) +'>'

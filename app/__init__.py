@@ -1,8 +1,21 @@
 from flask import Flask, render_template
+from flask_graphql import GraphQLView
+from app import logic
+from app.db import db_session
+# from app.schema import schema
 
 app = Flask(__name__)
 
-from yourapplication.database import db_session
+# ref: https://docs.graphene-python.org/projects/sqlalchemy/en/latest/tutorial/
+# app.add_url_rule(
+#     '/graphql',
+#     view_func=GraphQLView.as_view(
+#         'graphql',
+#         schema=schema,
+#         graphiql=True # for having the GraphiQL interface
+#     )
+# )
+
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
