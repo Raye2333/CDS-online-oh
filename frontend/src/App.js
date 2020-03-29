@@ -16,6 +16,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import Classes from './Classes';
 import Course from './course';
+import History from './history'
 
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -132,7 +133,10 @@ export default function Dashboard() {
   const NotFound = () => {
     return (<h1>Page not found.</h1>);
   }
-
+  const refHist = () => {
+    history.push("/hist")
+    history.go(0);
+  }
   const refPage = () => {
     history.push("/");
     history.go(0);
@@ -141,8 +145,8 @@ export default function Dashboard() {
   return (
     <div className={classes.root}>
       <Router >
-
         <CssBaseline />
+        {/*Header and Open/Close SideBar Button*/}
         <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
           <Toolbar className={classes.toolbar}>
             <IconButton
@@ -167,6 +171,7 @@ export default function Dashboard() {
           </Toolbar>
         </AppBar>
 
+        {/*Side Bar*/}
         <Drawer
           variant="permanent"
           classes={{
@@ -179,7 +184,7 @@ export default function Dashboard() {
                 <ListItemIcon><HomeIcon /></ListItemIcon>
                 <ListItemText primary="Home" />
               </ListItem>
-              <ListItem button>
+              <ListItem button onClick={refHist}>
                 <ListItemIcon><HistoryIcon /></ListItemIcon>
                 <ListItemText primary="History" />
               </ListItem>
@@ -212,12 +217,11 @@ export default function Dashboard() {
 
 
 
-
+          {/* Load Body of Each Page */}
           <Switch>
-            <Route exact path="/course" component={Course}>
-            </Route>
-            <Route exact path="/" component={Classes} >
-            </Route>
+            <Route path="/course" component={Course} />
+            <Route path="/hist" component={History} />
+            <Route exact path="/" component={Classes} />
             <Route component={NotFound}></Route>
           </Switch>
 

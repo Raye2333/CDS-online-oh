@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { CardActionArea, CardContent } from '@material-ui/core';
 import Course from './course';
+import History from './history';
 import styles from './environment.module.css';
 
 import {
@@ -20,15 +21,14 @@ import {
 } from "react-router-dom";
 
 
-
+/* Body of Home Page, Creates Necessary Cards */
 
 export default function Classes() {
   return (
     <Router>
       <Switch>
-        <Route path="/course">
-          <Course />
-        </Route>
+        <Route path="/course" component={Course} />
+        <Route path="hist" component={History} />
         <Route path="/">
           <Container maxWidth="lg" className={styles.container}>
             <Typography component="p" variant="h4">
@@ -60,6 +60,8 @@ export default function Classes() {
   );
 }
 
+/* Generates Class Card Based on Data */
+
 function ClassCard() {
   return (
     <React.Fragment>
@@ -79,12 +81,14 @@ function ClassCard() {
     </React.Fragment >
   );
 }
-function AddClass() {
+
+/* Static Add Class Option */
+const AddClass = () => {
 
   return (
     <React.Fragment>
       <Card variant="outlined" className={styles.card}>
-        <CardActionArea >
+        <CardActionArea>
           <CardContent className={styles.alignment}>
             <Typography>Click to Add a Course</Typography>
           </CardContent>
@@ -92,9 +96,4 @@ function AddClass() {
       </Card>
     </React.Fragment>
   );
-}
-
-export {
-  AddClass,
-  ClassCard
 }

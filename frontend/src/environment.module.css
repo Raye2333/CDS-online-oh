@@ -24,3 +24,14 @@
   justify-content: center;
 }
 
+.header{
+  padding-left:16px;
+}
+
+.dotted {
+  display: grid;
+  overflow: auto;
+  flex-direction: row;
+  height: 200px;
+  border-style: dashed;
+}
