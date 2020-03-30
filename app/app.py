@@ -1,6 +1,5 @@
 from flask import Flask, request
 # from flask_graphql import GraphQLView
-import logic
 from db import User, Request, db
 import json
 from datetime import datetime
@@ -124,7 +123,7 @@ def check_queue_pos(user_id):
 
   res = {'success': True, 'data': str(pos)}
   return json.dumps
-  
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
