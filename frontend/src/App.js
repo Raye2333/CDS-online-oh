@@ -1,5 +1,6 @@
 import React from 'react';
-import clsx from 'clsx';
+
+/* Importing necessary tags */
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
@@ -11,7 +12,12 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import createHistory from 'history/createBrowserHistory';
+import clsx from 'clsx';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
+/* Importing Icons*/
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -21,16 +27,14 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import HelpIcon from '@material-ui/icons/Help';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
+/* Impoorting other JS files/pages of webapp*/
 import Classes from './Classes';
 import Course from './course';
 import History from './history';
 import styles from './environment.module.css';
 
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 
-
+/* Impoorting necessary Page Navigation tools (React-Router) */
 import {
   BrowserRouter as Router,
   Switch,
@@ -39,7 +43,7 @@ import {
   useParams,
 } from "react-router-dom";
 
-
+/* Copyright function */
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -53,12 +57,13 @@ function Copyright() {
 }
 const drawerWidth = 240;
 
+/* Probably bad code but JS Styling for sidebar and heading I got from a template */
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
   toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
+    paddingRight: 24,
   },
   toolbarIcon: {
     display: 'flex',
@@ -123,10 +128,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+/* History variable for useful page navigation */
 let history = createHistory();
 
+/* main function of the sidebar/heading creation */
 export default function Dashboard() {
   const classes = useStyles();
+  /* Handles Sidebar open and close */
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -134,9 +142,12 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
   const NotFound = () => {
     return (<h1>Page not found.</h1>);
   }
+
+  /* Page navigation methods for History and Home button */
   const refHist = () => {
     history.push("/hist")
     history.go(0);
@@ -145,7 +156,7 @@ export default function Dashboard() {
     history.push("/");
     history.go(0);
   }
-  let match = useRouteMatch();
+  /* Takes the web url (see index.js) and passes it to course.js in line 246 of this file*/
   let { id } = useParams();
 
   return (
@@ -197,7 +208,6 @@ export default function Dashboard() {
             </div>
             </List>
           </div>
-
           <Divider />
           <List >
             <div>
@@ -227,14 +237,13 @@ export default function Dashboard() {
 
 
 
-          {/* Load Body of Each Page */}
+          {/* Load Content of Each Page with Header above depending on url*/}
           <Switch>
             <Route path="/hist" component={History} />
             <Route exact path="/" component={Classes} />
             <Route path="/:id">
               <Course id={id} />
             </Route>
-
             <Route component={NotFound}></Route>
           </Switch>
 

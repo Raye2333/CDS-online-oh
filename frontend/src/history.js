@@ -15,7 +15,7 @@ import TextField from '@material-ui/core/TextField';
 
 import styles from './environment.module.css';
 
-
+/* Feedback based on Past Sessions (if I understood Magd's vision of this page correctly) */
 export default function History() {
   return (
     < Container maxWidth="lg" className={styles.container} >
@@ -42,7 +42,7 @@ export default function History() {
 
   );
 }
-
+/* Feedback Button and Dialog */
 function FeedbackForm() {
   const [open, setOpen] = React.useState(false);
 

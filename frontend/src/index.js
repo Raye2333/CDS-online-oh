@@ -7,7 +7,8 @@ import createHistory from 'history/createBrowserHistory';
 import * as serviceWorker from './serviceWorker';
 
 const history = createHistory()
-
+/* History was used for page navigation, the whole switch/route setup was only 
+implemented to pass the url down as a prop so I could use it */
 ReactDOM.render(
   <Router history={history}>
     <Switch>
