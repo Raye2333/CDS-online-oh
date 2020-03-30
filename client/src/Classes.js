@@ -21,7 +21,9 @@ import {
 let history = createHistory();
 
 export default function Classes() {
+  /* Data-driven active courses based on dummy json file */
   const classList = data.Courses
+
   function Refresh(course) {
     history.push(course)
     history.go(0);
@@ -82,7 +84,7 @@ function ClassCard(props) {
   );
 }
 
-/* Static Add Class Option */
+/* Static Add Class Card */
 const AddClass = () => {
 
   return (

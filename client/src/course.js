@@ -17,15 +17,14 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 
-
-
 import styles from './environment.module.css';
 import data from './Student';
 
+/* Display Course page after selecting a course */
 export default function Course(props) {
+  /* Arbitrary json file just to test and learn data-driven principles */
   const classList = data.Courses;
   const getID = classList.map(course => { if (course.split(' ').join('') == props.id) return (course) });
-
   return (
     <React.Fragment>
       {/* Header of Body */}
@@ -43,6 +42,8 @@ export default function Course(props) {
             <RaiseHand />
           </Grid>
         </Grid>
+
+        {/* Everything Below Queue card (i.e. Active Staff, News Feed) */}
         <Grid container spacing={2} justify="left" className={styles.container}>
           <PersonIcon fontSize="large" />
           <Grid item spacing={3} xs={4}>
@@ -76,7 +77,6 @@ export default function Course(props) {
             <Typography>David Gries</Typography>
             <Typography>Nate Foster</Typography>
             <Typography>Tanmay Bansal</Typography>
-
           </Grid>
         </Grid>
       </Container>
@@ -100,7 +100,7 @@ function RaiseHand() {
     if (raised == false) setOpen(true);
     else Lower();
   }
-
+  /* Dialog Form for Queueing */
   return (
     <React.Fragment>
       <Card variant="outlined" className={styles.card}>
