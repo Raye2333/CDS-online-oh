@@ -1,10 +1,19 @@
-from flask import Flask, render_template
+from flask import Flask, request
 from flask_graphql import GraphQLView
-from app import logic
-from app.db import db_session
-# from app.schema import schema
+import logic
+from db import User, Request, db
+# import schema
 
+db_filename = "app/tmp/test.db"
 app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///%s' % db_filename
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ECHO'] = True
+
+db.init_app(app)
+with app.app_context():
+    db.create_all()
 
 # ref: https://docs.graphene-python.org/projects/sqlalchemy/en/latest/tutorial/
 # app.add_url_rule(
@@ -16,17 +25,12 @@ app = Flask(__name__)
 #     )
 # )
 
-
-@app.teardown_appcontext
-def shutdown_session(exception=None):
-    db_session.remove()
-
-# @app.route('/')
-# def home():
-#   return render_template('home.html')
-
 @app.route('/queue/<int:queue_id>')
 def queue():
+  pass
+
+@app.route('/dequeue/<int:queue_id>')
+def dequeue():
   pass
 
 @app.route('/course/<int:course_id>', methods=['GET', 'POST'])
