@@ -28,9 +28,18 @@ class Request(db.Model):
         self.time_posted = kwargs.get('time_posted')
         self.queue_pos = kwargs.get('queue_pos')
   
+
+  def serialize(self):
+    return {
+        'user_id': self.user_id,
+        'course_id' : self.course_id,
+        'time_posted': self.time_posted,
+        'queue_pos' : self.queue_pos,
+    }
+
   def __repr__(self):
-    return '<Request from ' + str(self.net_id) + ' for ' + str(self.course_id) +\
-    ', posted ' + str(self.time_posted) + '>'
+    return '<Request for ' + str(self.course_id) +\
+    ', posted ' + str(self.time_posted) + ' at queue position ' + str(self.queue_pos) + 'by user' + str(self.user_id) + '>'
 
 
 class User(db.Model):
@@ -50,6 +59,11 @@ class User(db.Model):
       return '<User ' + str(self.net_id) + ', TAing ' + str(self.ta_course_id) + '>'
     else:
       return '<User ' + str(self.net_id) +'>'
+
+  def get_netid(self): 
+    return {
+      'net_id': self.net_id
+    }
     
   # def __init__(self, net_id=None, ta_course_id=None, ta_zoom_link=None):
   #   self.net_id = net_id

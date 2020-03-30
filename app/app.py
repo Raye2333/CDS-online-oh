@@ -3,7 +3,7 @@ from flask import Flask, request
 import logic
 from db import User, Request, db
 import json
-
+from datetime import datetime
 # import schema
 
 db_filename = "oh.db"
@@ -27,9 +27,7 @@ with app.app_context():
 #     )
 # )
 
-@app.route('/queue/<int:queue_id>')
-def queue():
-  pass
+
 
 @app.route('/dequeue/<int:queue_id>')
 def dequeue():
@@ -45,12 +43,63 @@ def register_user():
   user = User(
     net_id = net_id,
     ta_course_id = ta_course_id, 
-    ta_zoom_link = ta_zoom_link, 
+    ta_zoom_link = ta_zoom_link
     )
 
   db.session.add(user)
   db.session.commit()
   return json.dumps({'success': True, 'data' : user.__repr__()}), 201
+
+@app.route('/users', methods = ['GET'])
+def get_all_users():
+  users = User.query.all()
+  res = {'success': True, 'data': [u.__repr__() for u in users]}
+  return json.dumps(res), 200
+
+@app.route('/requests', methods = ['GET'])
+def get_all_requests():
+  requests = Request.query.all()
+  res = {'success': True, 'data': [u.__repr__() for u in requests]}
+  return json.dumps(res), 200
+
+@app.route('/queue/<int:user_id>', methods = ['POST'])
+def create_queue_request(user_id):
+  post_body = json.loads(request.data)
+  user_id = user_id
+  course_id = post_body.get('course_id')
+  time_posted = datetime.now()
+  user = User.query.filter_by(id = user_id).first()
+  user_ser = user.get_netid()
+
+  #checks to see if this user is already in a queue
+  user_requests = Request.query.filter_by(user_id = user_id).first()
+
+  #if the user is already in a queue it does not allow them to make another request
+  if not user_requests is None: 
+    return  json.dumps({'success': False, 'user': "user alr made request"}), 201
+  
+  #tracking existing requests under the course_id in order to find current queue length
+  existing_requests = Request.query.filter_by(course_id = course_id)
+
+  if not existing_requests:
+    queue_pos = 1
+  else: 
+    length = 0
+    for u in existing_requests:
+      length += 1
+    queue_pos = length + 1
+    
+  queue_request = Request(
+      user_id = user_id,
+      course_id = course_id,
+      time_posted = time_posted,
+      queue_pos = queue_pos
+    )
+
+  db.session.add(queue_request)
+  db.session.commit()
+  return json.dumps({'success': True, 'user': user_ser, 'data' : queue_request.__repr__()}), 201
+  
 
 # @app.route('/course/<int:course_id>', methods=['GET', 'POST'])
 # def course():
