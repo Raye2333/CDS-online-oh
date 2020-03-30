@@ -65,6 +65,8 @@ OR
 
 ## System Design
 
+![General Cloud + Kubernetes Architechture](docs/architechture/imgs/OH-Architecture.png)
+
 ## Testing
 
 ### The Impoartance of Automation
