@@ -27,12 +27,6 @@ with app.app_context():
 #     )
 # )
 
-
-
-@app.route('/dequeue/<int:queue_id>')
-def dequeue():
-  pass
-
 @app.route('/register', methods = ['POST'])
 def register_user():
   post_body = json.loads(request.data)
@@ -99,12 +93,38 @@ def create_queue_request(user_id):
   db.session.add(queue_request)
   db.session.commit()
   return json.dumps({'success': True, 'user': user_ser, 'data' : queue_request.__repr__()}), 201
-  
 
-# @app.route('/course/<int:course_id>', methods=['GET', 'POST'])
-# def course():
-#   if request.method == 'GET':
-#      return logic.get_queues(course_id)
+@app.route('/dequeue/<int:user_id>', methods = ['POST'])
+def remove_from_queue(user_id):
+  post_body = json.loads(request.data)
+  user_id = user_id
+  course_id = post_body.get('course_id')
+
+  user_request = Request.query.filter_by(user_id=user_id).filter_by(course_id=course_id).first()
+  db.session.delete(user_request)
+  db.session.commit()
+
+  remaining_requests = Request.query.filter_by(course_id=course_id).first()
+  for request in remaining_requests:
+    request.queue_pos -= 1
+  db.session.commit()
+
+  # unsure what to return
+  res = {'success': True, 'data': [u.__repr__() for u in remaining_requests]}
+  return json.dumps(res), 200
+
+@app.route('/check_pos/<int:user_id>', methods = ['POST'])
+def check_queue_pos(user_id):
+  post_body = json.loads(request.data)
+  user_id = user_id
+  course_id = post_body.get('course_id')
+
+  user_request = Request.query.filter_by(user_id=user_id).filter_by(course_id=course_id).first()
+  pos = user_request.queue_pos
+
+  res = {'success': True, 'data': str(pos)}
+  return json.dumps
+  
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
