@@ -4,7 +4,7 @@ import logic
 from db import User, Request, db
 # import schema
 
-db_filename = "app/tmp/test.db"
+db_filename = "tmp/test.db"
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///%s' % db_filename
