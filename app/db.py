@@ -47,7 +47,7 @@ class User(db.Model):
   
   def __repr__(self):
     if (self.ta_course_id is not None):
-      return '<User ' + str(self.net_id) + ', TAing' + str(self.ta_course_id) + '>'
+      return '<User ' + str(self.net_id) + ', TAing ' + str(self.ta_course_id) + '>'
     else:
       return '<User ' + str(self.net_id) +'>'
     

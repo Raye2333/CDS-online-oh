@@ -35,6 +35,23 @@ def queue():
 def dequeue():
   pass
 
+@app.route('/register', methods = ['POST'])
+def register_user():
+  post_body = json.loads(request.data)
+  net_id = post_body.get('net_id', '')
+  ta_course_id = post_body.get('ta_course_id', 0)
+  ta_zoom_link = post_body.get('ta_zoom_link', '')
+
+  user = User(
+    net_id = net_id,
+    ta_course_id = ta_course_id, 
+    ta_zoom_link = ta_zoom_link, 
+    )
+
+  db.session.add(user)
+  db.session.commit()
+  return json.dumps({'success': True, 'data' : user.__repr__()}), 201
+
 # @app.route('/course/<int:course_id>', methods=['GET', 'POST'])
 # def course():
 #   if request.method == 'GET':
