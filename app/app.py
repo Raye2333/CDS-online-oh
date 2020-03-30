@@ -1,10 +1,12 @@
 from flask import Flask, request
-from flask_graphql import GraphQLView
+# from flask_graphql import GraphQLView
 import logic
 from db import User, Request, db
+import json
+
 # import schema
 
-db_filename = "tmp/test.db"
+db_filename = "oh.db"
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///%s' % db_filename
@@ -33,10 +35,10 @@ def queue():
 def dequeue():
   pass
 
-@app.route('/course/<int:course_id>', methods=['GET', 'POST'])
-def course():
-  if request.method == 'GET':
-     return logic.get_queues(course_id)
+# @app.route('/course/<int:course_id>', methods=['GET', 'POST'])
+# def course():
+#   if request.method == 'GET':
+#      return logic.get_queues(course_id)
 
 if __name__ == '__main__':
-  app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
