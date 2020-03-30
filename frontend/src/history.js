@@ -4,7 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
-import { CardActionArea, CardContent } from '@material-ui/core';
+import { CardContent } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -13,46 +13,33 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 
-import Classes from './Classes'
-import styles from './environment.module.css'
-
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import styles from './environment.module.css';
 
 
 export default function History() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/hist">
-          {/* Header of Body */}
-          <Container maxWidth="lg" className={styles.container}>
-            <Typography component="p" variant="h5">
-              Previous Sessions
+    < Container maxWidth="lg" className={styles.container} >
+      {/* Header of Body */}
+
+      <Typography component="p" variant="h5">
+        Previous Sessions
             </Typography>
-            <Divider orientation="horizontal" variant="fullWidth" />
-            <Grid container spacing={1} justify="left" className={styles.container}>
-              <Grid item spacing={2} xs={6}>
-                <div className={styles.cards}>
-                  <PastSession />
-                </div>
-              </Grid>
-              <Grid item spacing={2} xs={6}>
-                <div className={styles.cards}>
-                  <PastSession />
-                </div>
-              </Grid>
+      <Divider orientation="horizontal" variant="fullWidth" />
+      <Grid container spacing={1} justify="left" className={styles.container}>
+        <Grid item spacing={2} xs={6}>
+          <div className={styles.cards}>
+            <PastSession />
+          </div>
+        </Grid>
+        <Grid item spacing={2} xs={6}>
+          <div className={styles.cards}>
+            <PastSession />
+          </div>
+        </Grid>
 
-            </Grid>
-          </Container>
-        </Route>
-        <Route exact path="/" component={Classes} />
+      </Grid>
+    </Container >
 
-      </Switch>
-    </Router>
   );
 }
 

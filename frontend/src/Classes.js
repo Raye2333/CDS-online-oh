@@ -1,74 +1,74 @@
 import React from 'react';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
+import createHistory from 'history/createBrowserHistory';
+import { CardActionArea, CardContent } from '@material-ui/core';
 
-import { makeStyles } from '@material-ui/core/styles';
+
 import Typography from '@material-ui/core/Typography';
 
-import { CardActionArea, CardContent } from '@material-ui/core';
-import Course from './course';
-import History from './history';
 import styles from './environment.module.css';
+import data from './Student';
 
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link
 } from "react-router-dom";
 
 
 /* Body of Home Page, Creates Necessary Cards */
+let history = createHistory();
 
 export default function Classes() {
+  const classList = data.Courses
+  function Refresh(course) {
+    history.push(course)
+    history.go(0);
+  }
+
   return (
-    <Router>
-      <Switch>
-        <Route path="/course" component={Course} />
-        <Route path="hist" component={History} />
-        <Route path="/">
-          <Container maxWidth="lg" className={styles.container}>
-            <Typography component="p" variant="h4">
-              Active Courses
+    <Container maxWidth="lg" className={styles.container}>
+      <Typography component="p" variant="h4">
+        Active Courses
             </Typography>
-            <Divider orientation="horizontal" variant="fullWidth" />
-            <Grid container spacing={1} xs={12}>
-              <Grid item spacing={3} xs={4} >
-                <div className={styles.cards}>
-                  <Link className={styles.links} to="/course" >
-                    <ClassCard />
-                  </Link>
-                </div>
-              </Grid>
-              <Grid item spacing={3} xs={4} >
-                <div className={styles.cards}>
-                  <AddClass />
-                </div>
-              </Grid>
+      <Divider orientation="horizontal" variant="fullWidth" />
+      <Grid container spacing={1} xs={12}>
+        {classList.map(course => {
+          const url = course.split(' ').join('');
+          return (
+            < Grid item spacing={3} xs={4} >
+              <div className={styles.cards}>
+                <Link className={styles.links} onClick={() => Refresh(url)} to={{ pathname: url }} >
+                  <ClassCard class={course} />
+                </Link>
+              </div>
             </Grid>
-            <Typography component="p" variant="h4">
-              Inactive Courses
+          );
+        })}
+        <Grid item spacing={3} xs={4} >
+          <div className={styles.cards}>
+            <AddClass />
+          </div>
+        </Grid>
+      </Grid>
+      <Typography component="p" variant="h4">
+        Inactive Courses
             </Typography>
-            <Divider orientation="horizontal" variant="fullWidth" />
-          </Container>
-        </Route>
-      </Switch>
-    </Router >
+      <Divider orientation="horizontal" variant="fullWidth" />
+    </Container>
   );
 }
 
 /* Generates Class Card Based on Data */
 
-function ClassCard() {
+function ClassCard(props) {
   return (
     <React.Fragment>
       <Card variant="outlined" className={styles.card}>
         <CardActionArea >
           <CardContent className={styles.alignment}>
-            <Typography>CS 2110</Typography>
+            <Typography>{props.class}</Typography>
             <Typography color="textSecondary">
               Spring 2020
             </Typography>

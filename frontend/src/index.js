@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { Router } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import * as serviceWorker from './serviceWorker';
 
@@ -10,7 +10,14 @@ const history = createHistory()
 
 ReactDOM.render(
   <Router history={history}>
-    <App />
+    <Switch>
+      <Route exact path="/">
+        <App />
+      </Route>
+      <Route path="/:id">
+        <App />
+      </Route>
+    </Switch>
   </Router>,
   document.getElementById('root')
 );

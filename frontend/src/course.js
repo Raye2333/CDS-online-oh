@@ -1,9 +1,7 @@
 import React from 'react';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+
 
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
@@ -20,80 +18,69 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 
 
-import Classes, { ClassCard } from './Classes';
-import History from './history'
-import styles from './environment.module.css'
 
+import styles from './environment.module.css';
+import data from './Student';
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
-
-export default function Course() {
+export default function Course(props) {
+  const classList = data.Courses;
+  const getID = classList.map(course => { if (course.split(' ').join('') == props.id) return (course) });
 
   return (
-    <Router>
-      <Switch>
-        <Route path="/course">
-          {/* Header of Body */}
-          <Container maxWidth="lg" className={styles.container}>
-            <Typography component="p" variant="h5">
-              Class name
-            </Typography>
-            <Divider orientation="horizontal" variant="fullWidth" />
-            <Typography component="p" variant="h6">
-              Spring 2020
-            </Typography>
-            <Grid container spacing={1} xs={12} justify="center" className={styles.container}>
-              {/* Raising/Lowering Hand Card */}
-              <Grid item spacing={3} xs={4}>
-                <RaiseHand />
-              </Grid>
-            </Grid>
-            <Grid container spacing={2} justify="left" className={styles.container}>
-              <PersonIcon fontSize="large" />
-              <Grid item spacing={3} xs={4}>
-                <div className={styles.header}>
-                  <Typography >Staff Activity</Typography>
-                  <Divider orientation="horizontal" variant="fullWidth" />
-                </div>
-              </Grid>
-              <Grid item spacing={3} xs={3}>
-              </Grid>
-              <AnnouncementIcon fontSize="large" />
-              <Grid item spacing={3} xs={4}>
-                <div className={styles.header}>
-                  <Typography>News Feed</Typography>
-                  <Divider orientation="horizontal" variant="fullWidth" />
-                </div>
-              </Grid>
-            </Grid>
-            <Grid container spacing={1} alignItems="stretch" justify="left" className={styles.container}>
-              <Grid item xs={2}>
-                <div>
-                  <Typography>Active Staff</Typography>
-                  <Typography>Students in Queue</Typography>
-                </div>
-              </Grid>
-              <Grid item xs={1} alignItems="stretch">
-                <Divider orientation="vertical" />
-              </Grid>
-              <Grid item xs={2}>
-                <Typography>Magd Bayoumi</Typography>
-                <Typography>David Gries</Typography>
-                <Typography>Nate Foster</Typography>
-                <Typography>Tanmay Bansal</Typography>
+    <React.Fragment>
+      {/* Header of Body */}
+      <Container maxWidth="lg" className={styles.container}>
+        <Typography component="p" variant="h5">
+          {getID}
+        </Typography>
+        <Divider orientation="horizontal" variant="fullWidth" />
+        <Typography component="p" variant="h6">
+          Spring 2020
+      </Typography>
+        <Grid container spacing={1} xs={12} justify="center" className={styles.container}>
+          {/* Raising/Lowering Hand Card */}
+          <Grid item spacing={3} xs={4}>
+            <RaiseHand />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} justify="left" className={styles.container}>
+          <PersonIcon fontSize="large" />
+          <Grid item spacing={3} xs={4}>
+            <div className={styles.header}>
+              <Typography >Staff Activity</Typography>
+              <Divider orientation="horizontal" variant="fullWidth" />
+            </div>
+          </Grid>
+          <Grid item spacing={3} xs={3}>
+          </Grid>
+          <AnnouncementIcon fontSize="large" />
+          <Grid item spacing={3} xs={4}>
+            <div className={styles.header}>
+              <Typography>News Feed</Typography>
+              <Divider orientation="horizontal" variant="fullWidth" />
+            </div>
+          </Grid>
+        </Grid>
+        <Grid container spacing={1} alignItems="stretch" justify="left" className={styles.container}>
+          <Grid item xs={2}>
+            <div>
+              <Typography>Active Staff</Typography>
+              <Typography>Students in Queue</Typography>
+            </div>
+          </Grid>
+          <Grid item xs={1} alignItems="stretch">
+            <Divider orientation="vertical" />
+          </Grid>
+          <Grid item xs={2}>
+            <Typography>Magd Bayoumi</Typography>
+            <Typography>David Gries</Typography>
+            <Typography>Nate Foster</Typography>
+            <Typography>Tanmay Bansal</Typography>
 
-              </Grid>
-            </Grid>
-          </Container>
-        </Route>
-        <Route path="/hist" component={History} />
-        <Route path="/" component={Classes} />
-      </Switch>
-    </Router>
+          </Grid>
+        </Grid>
+      </Container>
+    </React.Fragment>
   );
 }
 
@@ -113,7 +100,6 @@ function RaiseHand() {
     if (raised == false) setOpen(true);
     else Lower();
   }
-
 
   return (
     <React.Fragment>
@@ -150,3 +136,4 @@ function RaiseHand() {
     </React.Fragment >
   );
 }
+

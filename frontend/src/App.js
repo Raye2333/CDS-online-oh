@@ -10,28 +10,33 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import createHistory from 'history/createBrowserHistory';
 
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-
-import Classes from './Classes';
-import Course from './course';
-import History from './history'
-
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HomeIcon from '@material-ui/icons/Home';
 import HistoryIcon from '@material-ui/icons/History';
 import SettingsIcon from '@material-ui/icons/Settings';
 import HelpIcon from '@material-ui/icons/Help';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import createHistory from 'history/createBrowserHistory';
+
+import Classes from './Classes';
+import Course from './course';
+import History from './history';
+import styles from './environment.module.css';
+
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
+  useRouteMatch,
+  useParams,
 } from "react-router-dom";
 
 
@@ -46,7 +51,6 @@ function Copyright() {
     </Typography >
   );
 }
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -141,6 +145,8 @@ export default function Dashboard() {
     history.push("/");
     history.go(0);
   }
+  let match = useRouteMatch();
+  let { id } = useParams();
 
   return (
     <div className={classes.root}>
@@ -196,6 +202,10 @@ export default function Dashboard() {
           <List >
             <div>
               <List><div>
+                <ListItem>
+                  <ListItemIcon><AccountCircleIcon /></ListItemIcon>
+                  <Typography>First Last</Typography>
+                </ListItem>
                 <ListItem button >
                   <ListItemIcon ><SettingsIcon /></ListItemIcon>
                   <ListItemText primary="Account Settings" />
@@ -219,15 +229,18 @@ export default function Dashboard() {
 
           {/* Load Body of Each Page */}
           <Switch>
-            <Route path="/course" component={Course} />
             <Route path="/hist" component={History} />
             <Route exact path="/" component={Classes} />
+            <Route path="/:id">
+              <Course id={id} />
+            </Route>
+
             <Route component={NotFound}></Route>
           </Switch>
 
 
 
-          <Box pt={28}>
+          <Box className={styles.copyright} pt={28}>
             <Copyright />
           </Box>
         </main>
