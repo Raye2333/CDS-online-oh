@@ -69,7 +69,7 @@ def create_queue_request(user_id):
 
   #if the user is already in a queue it does not allow them to make another request
   if not user_requests is None: 
-    return  json.dumps({'success': False, 'user': "user alr made request"}), 201
+    return  json.dumps({'success': False, 'user': "user already made a request"}), 201
   
   #tracking existing requests under the course_id in order to find current queue length
   existing_requests = Request.query.filter_by(course_id = course_id)
@@ -114,6 +114,12 @@ def remove_from_queue(user_id):
   res = {'success': True, 'data': [u.__repr__() for u in remaining_requests]}
   return json.dumps(res), 200
 
+@app.route('/requests/<int:course_id>', methods = ['GET'])
+def get_requests_by_course(course_id): 
+  course_requests = Request.query.filter_by(course_id = course_id)
+  res = {'success': True, 'data': [u.__repr__() for u in course_requests]}
+  return json.dumps(res), 200
+
 @app.route('/check_pos/<int:user_id>', methods = ['POST'])
 def check_queue_pos(user_id):
   post_body = json.loads(request.data)
@@ -125,6 +131,8 @@ def check_queue_pos(user_id):
 
   res = {'success': True, 'data': str(pos)}
   return json.dumps
+
+
 
 
 if __name__ == '__main__':
