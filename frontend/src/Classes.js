@@ -37,12 +37,12 @@ export default function Classes() {
       <Divider orientation="horizontal" variant="fullWidth" />
       <Grid container spacing={1} xs={12}>
         {classList.map(course => {
-          const url = course.split(' ').join('');
+          const url = course.name.split(' ').join('');
           return (
             < Grid item spacing={3} xs={4} >
               <div className={styles.cards}>
                 <Link className={styles.links} onClick={() => Refresh(url)} to={{ pathname: url }} >
-                  <ClassCard class={course} />
+                  <ClassCard class={course.name} />
                 </Link>
               </div>
             </Grid>
