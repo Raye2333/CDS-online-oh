@@ -100,12 +100,14 @@ def remove_from_queue(user_id):
   course_id = post_body.get('course_id')
 
   user_request = Request.query.filter_by(user_id=user_id).filter_by(course_id=course_id).first()
+  if not user_request: 
+    return json.dumps({'success': False, 'data': "request for queue does not exist"}), 200
   db.session.delete(user_request)
   db.session.commit()
 
-  remaining_requests = Request.query.filter_by(course_id=course_id).first()
-  for request in remaining_requests:
-    request.queue_pos -= 1
+  remaining_requests = Request.query.filter_by(course_id=course_id)
+  for r in remaining_requests:
+    r.queue_pos -= 1
   db.session.commit()
 
   # unsure what to return
