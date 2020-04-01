@@ -51,7 +51,7 @@ class Request(db.Model):
 
   def __repr__(self):
     return '<Request about ' + self.request_topic + ' for ' + str(self.course_id) +\
-    ', posted ' + str(self.time_posted) + ' at queue position ' + str(self.queue_pos) + 'by user' + str(self.user_id) + '>'
+    ', posted ' + str(self.time_posted) + ' at queue position ' + str(self.queue_pos) + ' by user ' + str(self.user_id) + '>'
 
 
 class User(db.Model):

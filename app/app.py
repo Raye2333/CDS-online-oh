@@ -26,6 +26,7 @@ with app.app_context():
 #     )
 # )
 
+#Route to add a user
 @app.route('/register', methods = ['POST'])
 def register_user():
   post_body = json.loads(request.data)
@@ -43,18 +44,21 @@ def register_user():
   db.session.commit()
   return json.dumps({'success': True, 'data' : user.__repr__()}), 201
 
+#Route to get all existing users
 @app.route('/users', methods = ['GET'])
 def get_all_users():
   users = User.query.all()
   res = {'success': True, 'data': [u.__repr__() for u in users]}
   return json.dumps(res), 200
 
+#Route to get all existing requests
 @app.route('/requests', methods = ['GET'])
 def get_all_requests():
   requests = Request.query.all()
   res = {'success': True, 'data': [u.__repr__() for u in requests]}
   return json.dumps(res), 200
 
+#Route to add a user to a queue
 @app.route('/queue/<int:user_id>', methods = ['POST'])
 def create_queue_request(user_id):
   post_body = json.loads(request.data)
@@ -65,6 +69,8 @@ def create_queue_request(user_id):
   user = User.query.filter_by(id = user_id).first()
   user_ser = user.get_netid()
 
+  if not request_topic: 
+    return json.dumps({'success': False, 'issue': "There must be a request topic entered"}), 201
   #checks to see if this user is already in a queue
   user_requests = Request.query.filter_by(user_id = user_id).filter_by(course_id = course_id).first()
 
@@ -95,6 +101,7 @@ def create_queue_request(user_id):
   db.session.commit()
   return json.dumps({'success': True, 'user': user_ser, 'data' : queue_request.__repr__()}), 201
 
+#Route to remove a user from the queue
 @app.route('/dequeue/<int:user_id>', methods = ['POST'])
 def remove_from_queue(user_id):
   post_body = json.loads(request.data)
@@ -116,12 +123,14 @@ def remove_from_queue(user_id):
   res = {'success': True, 'data': [u.__repr__() for u in remaining_requests]}
   return json.dumps(res), 200
 
+#Route to get all requests for a particular course
 @app.route('/requests/<int:course_id>', methods = ['GET'])
 def get_requests_by_course(course_id): 
   course_requests = Request.query.filter_by(course_id = course_id)
   res = {'success': True, 'data': [u.__repr__() for u in course_requests]}
   return json.dumps(res), 200
 
+#Route to check the position of a user in the queue
 @app.route('/check_pos/<int:user_id>', methods = ['POST'])
 def check_queue_pos(user_id):
   post_body = json.loads(request.data)
@@ -134,8 +143,6 @@ def check_queue_pos(user_id):
   res = {'success': True, 'data': str(pos)}
   return json.dumps
 
-
-
-
+#Run Application
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
