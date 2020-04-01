@@ -15,18 +15,14 @@ class Request(db.Model):
   course_id = db.Column(db.Integer, nullable=False)
   time_posted = db.Column(db.String, default=datetime.utcnow)
   queue_pos = db.Column(db.Integer)
-
-  # def __init__(self, user_id=None, course_id=None, time_posted=None, queue_pos=None):
-  #   self.user_id = user_id
-  #   self.course_id = course_id
-  #   self.time_posted = time_posted
-  #   self.queue_pos = queue_pos
+  request_topic = db.Column(db.String)
 
   def __init__(self, **kwargs):
         self.user_id = kwargs.get('user_id', '')
         self.course_id = kwargs.get('course_id','')
         self.time_posted = kwargs.get('time_posted')
         self.queue_pos = kwargs.get('queue_pos')
+        self.request_topic = kwargs.get('request_topic')
   
 
   def serialize(self):
@@ -35,10 +31,11 @@ class Request(db.Model):
         'course_id' : self.course_id,
         'time_posted': self.time_posted,
         'queue_pos' : self.queue_pos,
+        'request_topic' : self.request_topic,
     }
 
   def __repr__(self):
-    return '<Request for ' + str(self.course_id) +\
+    return '<Request about ' + self.request_topic + ' for ' + str(self.course_id) +\
     ', posted ' + str(self.time_posted) + ' at queue position ' + str(self.queue_pos) + 'by user' + str(self.user_id) + '>'
 
 
@@ -65,10 +62,6 @@ class User(db.Model):
       'net_id': self.net_id
     }
     
-  # def __init__(self, net_id=None, ta_course_id=None, ta_zoom_link=None):
-  #   self.net_id = net_id
-  #   self.ta_course_id = ta_course_id
-  #   self.ta_zoom_link = ta_zoom_link
 
     
         

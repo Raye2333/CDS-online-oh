@@ -61,11 +61,12 @@ def create_queue_request(user_id):
   user_id = user_id
   course_id = post_body.get('course_id')
   time_posted = datetime.now()
+  request_topic = post_body.get('request_topic')
   user = User.query.filter_by(id = user_id).first()
   user_ser = user.get_netid()
 
   #checks to see if this user is already in a queue
-  user_requests = Request.query.filter_by(user_id = user_id).first()
+  user_requests = Request.query.filter_by(user_id = user_id).filter_by(course_id = course_id).first()
 
   #if the user is already in a queue it does not allow them to make another request
   if not user_requests is None: 
@@ -86,7 +87,8 @@ def create_queue_request(user_id):
       user_id = user_id,
       course_id = course_id,
       time_posted = time_posted,
-      queue_pos = queue_pos
+      queue_pos = queue_pos,
+      request_toopoic = request_topic
     )
 
   db.session.add(queue_request)
