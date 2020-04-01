@@ -60,7 +60,7 @@ def create_queue_request(user_id):
   post_body = json.loads(request.data)
   user_id = user_id
   course_id = post_body.get('course_id')
-  time_posted = datetime.now()
+  time_posted = str(datetime.utcnow())
   request_topic = post_body.get('request_topic')
   user = User.query.filter_by(id = user_id).first()
   user_ser = user.get_netid()

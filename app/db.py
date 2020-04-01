@@ -9,11 +9,26 @@ db = SQLAlchemy()
 # )
 
 class Request(db.Model):
+  '''
+  A record in the request table
+
+  Columns:
+  id (int): primary key
+  user_id (int): id of the user who made the request, links to user table
+  course_id (int): Cornell course number/code for the course the user has a question about
+  time_posted (string): the time the request is made in UTC, in the format '2020-04-01 01:07:02.407928'
+  queue_pos (int): the position of the user in their course's queue
+  request_topic (string): the topic of the user's request
+
+  The request table holds all users' requests to join queues, regardless of which 
+  course the request is for. Users may have multiple requests in the table, as 
+  long as each request has a different course_id.
+  '''
   __tablename__ = 'request'
   id = db.Column(db.Integer, primary_key=True)
   user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
   course_id = db.Column(db.Integer, nullable=False)
-  time_posted = db.Column(db.String, default=datetime.utcnow)
+  time_posted = db.Column(db.String, default=str(datetime.utcnow()))
   queue_pos = db.Column(db.Integer)
   request_topic = db.Column(db.String)
 
@@ -40,6 +55,15 @@ class Request(db.Model):
 
 
 class User(db.Model):
+  '''
+  A record in the user table
+
+  Columns:
+  id (int): primary key
+  net_id (string): Cornell netID of the user
+  ta_course_id (int): Cornell course number/code for the course the user is TAing, 0 if they are not TAing a course
+  ta_zoom_link (string): zoom link of the TA, '' if they are not TAing a course
+  '''
   __tablename__ = 'user'
   id = db.Column(db.Integer, primary_key=True)
   net_id = db.Column(db.String, unique=True, nullable=False)
