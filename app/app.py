@@ -88,7 +88,7 @@ def create_queue_request(user_id):
       course_id = course_id,
       time_posted = time_posted,
       queue_pos = queue_pos,
-      request_toopoic = request_topic
+      request_topic = request_topic
     )
 
   db.session.add(queue_request)
