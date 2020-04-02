@@ -1,0 +1,5 @@
+[DB]
+USER = TBD
+PASS = TBD
+HOST = oh.db
+DIALECT = sqlite:///
