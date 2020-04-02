@@ -1,0 +1,66 @@
+.root {
+  display: flex;
+}
+
+.spacer {
+  min-height: 64px;
+}
+.content {
+  flex-grow: 1;
+  height: '100vh';
+  overflow: 'auto';
+}
+
+.container {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.cards {
+  padding: 30px;
+}
+
+.links {
+  text-decoration: none;
+  color: black;
+}
+
+.card {
+  display: grid;
+  overflow: auto;
+  flex-direction: row;
+  height: 200px;
+}
+
+.help {
+  display: grid;
+  overflow: auto;
+  flex-direction: row;
+}
+
+.alignment{
+  text-align: center;
+  justify-content: center;
+}
+
+.header{
+  padding-left:16px;
+}
+
+.dotted {
+  display: grid;
+  overflow: auto;
+  flex-direction: row;
+  height: 200px;
+  border-style: dashed;
+}
+
+.copyright {
+  padding-bottom: 16px;
+}
+
+.textfields {
+  display: flex;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}

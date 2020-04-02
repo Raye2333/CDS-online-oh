@@ -1,0 +1,64 @@
+{
+  "Courses": [
+    {
+      "name": "CS 2800",
+      "Queue": 5,
+      "active": 1,
+      "News": "There is no news, please be patient with our staff.",
+      "Staff": [
+        {
+          "name": "Magd Bayoumi",
+          "status": "inactive"
+        },
+        {
+          "name": "Jerry Sun",
+          "status": "active"
+        }
+      ]
+    },
+    {
+      "name": "CS 3110",
+      "active": 2,
+      "Queue": 6,
+      "News": "There is no news, please be patient with our staff.",
+      "Staff": [
+        {
+          "name": "Cora Wu",
+          "status": "active"
+        },
+        {
+          "name": "Raye Liu",
+          "status": "active"
+        }
+      ]
+    },
+    {
+      "name": "AEM 3390",
+      "active": 2,
+      "Queue": 7,
+      "News": "There is no news, please be patient with our staff.",
+      "Staff": [
+        {
+          "name": "Rishabh",
+          "status": "active"
+        },
+        {
+          "name": "Tanishq Aggarwal",
+          "status": "active"
+        }
+      ]
+    },
+    {
+      "name": "MATH 2940",
+      "active": 1,
+      "Queue": 8,
+      "News": "There is no news, please be patient with our staff.",
+      "Staff": [
+        {
+          "name": "Jerry",
+          "status": "active"
+        }
+      ]
+    }
+  ]
+}
