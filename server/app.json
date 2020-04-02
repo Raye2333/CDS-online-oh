@@ -1,0 +1,9 @@
+{
+  "name": "oh-online",
+  "description": "A web app to host office hours online",
+  "repository": "https://github.com/bayoumi17m/oh-online.git",
+  "scripts": {},
+  "env": {},
+  "addons": [],
+  "buildpacks": []
+}
