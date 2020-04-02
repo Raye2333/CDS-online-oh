@@ -5,6 +5,13 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import createHistory from 'history/createBrowserHistory';
 import { CardActionArea, CardContent } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 
 import Typography from '@material-ui/core/Typography';
@@ -86,16 +93,47 @@ function ClassCard(props) {
 
 /* Static Add Class Card */
 const AddClass = () => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <React.Fragment>
       <Card variant="outlined" className={styles.card}>
-        <CardActionArea>
+        <CardActionArea onClick={handleClickOpen}>
           <CardContent className={styles.alignment}>
             <Typography>Click to Add a Course</Typography>
           </CardContent>
         </CardActionArea>
       </Card>
+
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Adding Classes</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please enter the enrollment pin for this class to join its office hour queue.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Submit
+          </Button>
+        </DialogActions>
+      </Dialog>
     </React.Fragment>
   );
 }

@@ -32,6 +32,12 @@
   height: 200px;
 }
 
+.help {
+  display: grid;
+  overflow: auto;
+  flex-direction: row;
+}
+
 .alignment{
   text-align: center;
   justify-content: center;
@@ -50,5 +56,11 @@
 }
 
 .copyright {
+  padding-bottom: 16px;
+}
+
+.textfields {
+  display: flex;
+  padding-top: 16px;
   padding-bottom: 16px;
 }

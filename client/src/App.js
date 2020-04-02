@@ -32,14 +32,14 @@ import Classes from './Classes';
 import Course from './course';
 import History from './history';
 import styles from './environment.module.css';
-
+import Help from './help';
+import Settings from './settings'
 
 /* Impoorting necessary Page Navigation tools (React-Router) */
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  useRouteMatch,
   useParams,
 } from "react-router-dom";
 
@@ -152,6 +152,14 @@ export default function Dashboard() {
     history.push("/hist")
     history.go(0);
   }
+  const refHelp = () => {
+    history.push("/help")
+    history.go(0);
+  }
+  const refSettings = () => {
+    history.push("/settings")
+    history.go(0);
+  }
   const refPage = () => {
     history.push("/");
     history.go(0);
@@ -216,11 +224,11 @@ export default function Dashboard() {
                   <ListItemIcon><AccountCircleIcon /></ListItemIcon>
                   <Typography>First Last</Typography>
                 </ListItem>
-                <ListItem button >
+                <ListItem button onClick={refSettings}>
                   <ListItemIcon ><SettingsIcon /></ListItemIcon>
                   <ListItemText primary="Account Settings" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button onClick={refHelp}>
                   <ListItemIcon><HelpIcon /></ListItemIcon>
                   <ListItemText primary="Help" />
                 </ListItem>
@@ -241,6 +249,8 @@ export default function Dashboard() {
           <Switch>
             <Route path="/hist" component={History} />
             <Route exact path="/" component={Classes} />
+            <Route path="/help" component={Help} />
+            <Route path="/settings" component={Settings} />
             <Route path="/:id">
               <Course id={id} />
             </Route>
