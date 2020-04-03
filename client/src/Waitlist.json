@@ -1,0 +1,108 @@
+{
+  "Courses": [
+    {
+      "name": "CS 3110",
+      "active": 2,
+      "News": "There is no news, please be patient with our staff.",
+      "Students": [
+        {
+          "waiting": "yes",
+          "name": "Amy Penick",
+          "question": "Renaissance Music!"
+        },
+        {
+          "waiting": "yes",
+          "name": "Chris Elliot",
+          "question": "Drink?"
+        },
+        {
+          "waiting": "yes",
+          "name": "Tanmay Bansal",
+          "question": "Next meeting is on"
+        },
+        {
+          "waiting": "yes",
+          "name": "Dylan Tsai",
+          "question": "Opt II hw."
+        },
+        {
+          "waiting": "yes",
+          "name": "Emily Weed",
+          "question": "Hmmmm"
+        },
+        {
+          "waiting": "yes",
+          "name": "Camilo Cedeno-Tobon",
+          "question": "????"
+        },
+        {
+          "waiting": "yes",
+          "name": "Kathy JaYoung Byun",
+          "question": "????"
+        },
+        {
+          "waiting": "yes",
+          "name": "Chengrun ",
+          "question": "???????"
+        },
+        {
+          "waiting": "yes",
+          "name": "Raye Liu",
+          "question": "When does my quarantine end?"
+        },
+        {
+          "waiting": "yes",
+          "name": "Raye Liu",
+          "question": "When does my quarantine end?"
+        },
+        {
+          "waiting": "yes",
+          "name": "Raye Liu",
+          "question": "When does my quarantine end?"
+        },
+        {
+          "waiting": "yes",
+          "name": "Raye Liu",
+          "question": "When does my quarantine end?"
+        }
+      ],
+      "Staff": [
+        {
+          "name": "Cora Wu",
+          "status": "occupied"
+        },
+        {
+          "name": "Jerry Sun",
+          "status": "available"
+        },
+        {
+          "name": "Magd",
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "name": "MATH 2940",
+      "active": 1,
+      "Queue": 1,
+      "News": "There is no news, please be patient with our staff.",
+      "Students": [
+        {
+          "waiting": "yes",
+          "name": "Lily Zhang",
+          "question": "Table tennis?"
+        }
+      ],
+      "Staff": [
+        {
+          "name": "Jerry",
+          "status": "available"
+        },
+        {
+          "name": "Magd",
+          "status": "available"
+        }
+      ]
+    }
+  ]
+}
