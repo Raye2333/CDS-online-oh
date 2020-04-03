@@ -17,7 +17,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 import styles from './environment.module.css';
-import data from './Student';
+import data from './Waitlist';
 
 import {
   Link
@@ -82,8 +82,9 @@ function ClassCard(props) {
               Spring 2020
             </Typography>
             <Typography color="textSecondary">
-              Enrolled as Student
-      </Typography>
+              {/* Enrolled as Student */}
+              Enrolled as Staff
+            </Typography>
           </CardContent>
         </CardActionArea>
       </Card>
