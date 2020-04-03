@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -9,7 +7,6 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import { CardContent } from '@material-ui/core';
-import PersonIcon from '@material-ui/icons/Person';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -19,7 +16,20 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import FaceIcon from '@material-ui/icons/Face';
 import EcoIcon from '@material-ui/icons/Eco';
+import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
+import VideocamIcon from '@material-ui/icons/Videocam';
+import MessageIcon from '@material-ui/icons/Message';
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
+import Slide from '@material-ui/core/Slide';
+
+
+/* import for customized menu */
+import { withStyles } from '@material-ui/core/styles';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import SendIcon from '@material-ui/icons/Send';
 
 import styles from './environment.module.css';
 import data from './Waitlist';
@@ -34,12 +44,7 @@ export default function Course(props) {
   });
   const getActive = classList.map(course => {
     if (course.name.split(' ').join('') == props.id) return (
-      <Typography>{course.active}</Typography>
-    );
-  });
-  const getOccupied = classList.map(course => {
-    if (course.name.split(' ').join('') == props.id) return (
-      <Typography>{course.occupied}</Typography>
+      course.active
     );
   });
 
@@ -48,7 +53,7 @@ export default function Course(props) {
       course.Staff.map(staffer => {
         if (staffer.status == "available") {
           return (
-            <Typography>{staffer.name}</Typography>
+            <CustomizedMenus id={staffer.name} />
           );
         }
       })
@@ -60,7 +65,7 @@ export default function Course(props) {
       course.Staff.map(staffer => {
         if (staffer.status == "occupied") {
           return (
-            <Typography>{staffer.name}</Typography>
+            <CustomizedMenus id={staffer.name} />
           );
         }
       })
@@ -72,7 +77,7 @@ export default function Course(props) {
       course.Students.map(stud => {
         if (stud.waiting == "yes") {
           return (
-            <Typography>{stud.name}</Typography>
+            <AlertDialogSlide id={stud.name} question={stud.question} />
           );
         }
       })
@@ -147,9 +152,9 @@ export default function Course(props) {
           {/* Everything Below Queue card (i.e. Active Staff, News Feed) */}
           <Grid container spacing={2} justify="left" className={styles.container}>
             <SupervisedUserCircleIcon fontSize="large" />
-            <Grid item spacing={3} xs={4}>
+            <Grid item spacing={1} xs={4}>
               <div className={styles.header}>
-                <Typography >Staff Activity</Typography>
+                <Typography >Staff Activity: {getActive}</Typography>
                 <Divider orientation="horizontal" variant="fullWidth" />
               </div>
             </Grid>
@@ -194,39 +199,7 @@ export default function Course(props) {
 /* Changes Button and Launches Form for Raising Hand and getting help. Also
    will handle Lowering Hand */
 
-function LaunchZoom() {
-  const [ready, setReady] = React.useState(false)
-  const handleOpen = () => {
-    setReady(true);
-  }
-  const handleClose = () => {
-    setReady(false);
-  }
-  return (
-    <React.Fragment>
-      <Button variant="contained" color="primary" onClick={handleOpen}>
-        Join the Zoom call!
-      </Button>
-      <Dialog
-        open={ready}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description">
-        <DialogTitle id="alert-dialog-title">{"Help is here!"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Click the zoom link below and have your question answered:
-            zoom.blah.us.com
-                </DialogContentText>
-        </DialogContent>
-      </Dialog>
-    </React.Fragment>
-  );
-}
-
-
-function PostNews(props) {
-  const classList = data.Courses;
+function PostNews() {
   const [posting, setPosting] = React.useState(false)
   const toPost = () => {
     setPosting(true);
@@ -269,5 +242,149 @@ function PostNews(props) {
     </React.Fragment >
   );
 }
+
+const StyledMenu = withStyles({
+  paper: {
+    border: '1px solid #d3d4d5',
+  },
+})((props) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'center',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'center',
+    }}
+    {...props}
+  />
+));
+
+const StyledMenuItem = withStyles((theme) => ({
+  root: {
+    '&:focus': {
+      backgroundColor: theme.palette.primary.main,
+      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+        color: theme.palette.common.white,
+      },
+    },
+  },
+}))(MenuItem);
+
+function CustomizedMenus(props) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
+  return (
+    <div>
+      <Button
+        aria-controls="customized-menu"
+        aria-haspopup="true"
+        color="primary"
+        onClick={handleClick}
+        size="large"
+      >
+        {props.id}
+      </Button>
+      <StyledMenu
+        id="customized-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <StyledMenuItem>
+          <ListItemIcon>
+            <MessageIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary="Chat" />
+        </StyledMenuItem>
+        <StyledMenuItem>
+          <ListItemIcon>
+            <VideocamIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary="Zoom" />
+        </StyledMenuItem>
+        <StyledMenuItem>
+          <ListItemIcon>
+            <SendIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary="Email" />
+        </StyledMenuItem>
+        <StyledMenuItem>
+          <ListItemIcon>
+            <EmojiEmotionsIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary="Greet" />
+        </StyledMenuItem>
+      </StyledMenu>
+    </div>
+  );
+}
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+function AlertDialogSlide(props) {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <div>
+      <Button color="primary" onClick={handleClickOpen}>
+        {props.id}
+      </Button>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">{"Question"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            {props.question}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Zoom
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Chat
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Mark-solved
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Mark-unsolved
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+}
+
 
 
