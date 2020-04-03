@@ -2,8 +2,8 @@
   "Courses": [
     {
       "name": "CS 3110",
-      "Queue": 12,
-      "active": 2,
+      "Queue": 8,
+      "active": 3,
       "News": "There is no news, please be patient with our staff.",
       "Students": [
         {
@@ -19,12 +19,12 @@
         {
           "waiting": "yes",
           "name": "Tanmay Bansal",
-          "question": "Next meeting is on"
+          "question": "Shall we do dinner?"
         },
         {
           "waiting": "yes",
           "name": "Dylan Tsai",
-          "question": "Opt II hw."
+          "question": "Cat!"
         },
         {
           "waiting": "yes",
@@ -33,23 +33,18 @@
         },
         {
           "waiting": "yes",
+          "name": "Raye Liu",
+          "question": "我想吃炸鸡块蛋包饭，QSWL!"
+        },
+        {
+          "waiting": "yes",
           "name": "Camilo Cedeno-Tobon",
           "question": "????"
         },
         {
           "waiting": "yes",
-          "name": "Kathy JaYoung Byun",
-          "question": "????"
-        },
-        {
-          "waiting": "yes",
           "name": "Yufei Hu",
-          "question": "Touma Kazusa prpr"
-        },
-        {
-          "waiting": "yes",
-          "name": "Raye Liu",
-          "question": "When does my quarantine end? QSWL!"
+          "question": "霞之丘诗羽什么时候跟我结婚?"
         }
       ],
       "Staff": [
@@ -69,7 +64,7 @@
     },
     {
       "name": "MATH 2940",
-      "active": 1,
+      "active": 2,
       "Queue": 1,
       "News": "There is no news, please be patient with our staff.",
       "Students": [
