@@ -29,7 +29,11 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 /* Impoorting other JS files/pages of webapp*/
 import Classes from './Classes';
-import Course from './course';
+
+// Raye's change
+//import Course from './course';
+import Course from './staff';
+
 import History from './history';
 import styles from './environment.module.css';
 import Help from './help';
