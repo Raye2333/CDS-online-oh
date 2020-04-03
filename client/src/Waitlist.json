@@ -2,13 +2,14 @@
   "Courses": [
     {
       "name": "CS 3110",
+      "Queue": 12,
       "active": 2,
       "News": "There is no news, please be patient with our staff.",
       "Students": [
         {
           "waiting": "yes",
           "name": "Amy Penick",
-          "question": "Renaissance Music!"
+          "question": "????"
         },
         {
           "waiting": "yes",
@@ -28,7 +29,7 @@
         {
           "waiting": "yes",
           "name": "Emily Weed",
-          "question": "Hmmmm"
+          "question": "????"
         },
         {
           "waiting": "yes",
@@ -42,28 +43,13 @@
         },
         {
           "waiting": "yes",
-          "name": "Chengrun ",
-          "question": "???????"
+          "name": "Yufei Hu",
+          "question": "Touma Kazusa prpr"
         },
         {
           "waiting": "yes",
           "name": "Raye Liu",
-          "question": "When does my quarantine end?"
-        },
-        {
-          "waiting": "yes",
-          "name": "Raye Liu",
-          "question": "When does my quarantine end?"
-        },
-        {
-          "waiting": "yes",
-          "name": "Raye Liu",
-          "question": "When does my quarantine end?"
-        },
-        {
-          "waiting": "yes",
-          "name": "Raye Liu",
-          "question": "When does my quarantine end?"
+          "question": "When does my quarantine end? QSWL!"
         }
       ],
       "Staff": [
@@ -76,7 +62,7 @@
           "status": "available"
         },
         {
-          "name": "Magd",
+          "name": "Magd Bayoumi",
           "status": "available"
         }
       ]
@@ -99,7 +85,7 @@
           "status": "available"
         },
         {
-          "name": "Magd",
+          "name": "Magd Bayoumi",
           "status": "available"
         }
       ]
