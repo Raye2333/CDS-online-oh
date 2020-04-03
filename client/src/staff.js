@@ -46,7 +46,7 @@ export default function Course(props) {
   const StaffActive = classList.map(course => {
     if (course.name.split(' ').join('') == props.id) return (
       course.Staff.map(staffer => {
-        if (staffer.status == "active") {
+        if (staffer.status == "available") {
           return (
             <Typography>{staffer.name}</Typography>
           );
@@ -58,7 +58,7 @@ export default function Course(props) {
   const StaffOccupied = classList.map(course => {
     if (course.name.split(' ').join('') == props.id) return (
       course.Staff.map(staffer => {
-        if (staffer.status == "active") {
+        if (staffer.status == "occupied") {
           return (
             <Typography>{staffer.name}</Typography>
           );
@@ -117,7 +117,7 @@ export default function Course(props) {
         <Container maxWidth="lg" className={styles.container}>
           <Grid container spacing={2} justify="left" className={styles.container}>
             <FaceIcon fontSize="large" />
-            <Grid item spacing={3} xs={3}>
+            <Grid item spacing={3} xs={4}>
               <div className={styles.header}>
                 <Typography >Student Waiting: {QueueNum}</Typography>
                 <Divider orientation="horizontal" variant="fullWidth" />
@@ -134,7 +134,7 @@ export default function Course(props) {
           </Grid>
           <Grid container spacing={2} justify="left" className={styles.container}>
             <Grid item xs={1}></Grid>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               <div>{students}</div>
             </Grid>
             <Grid item spacing={5} xs={2}>
@@ -153,7 +153,7 @@ export default function Course(props) {
                 <Divider orientation="horizontal" variant="fullWidth" />
               </div>
             </Grid>
-            <Grid item spacing={3} xs={3}>
+            <Grid item spacing={3} xs={2}>
             </Grid>
             <AnnouncementIcon fontSize="large" />
             <Grid item spacing={3} xs={4}>
@@ -167,8 +167,8 @@ export default function Course(props) {
           <Grid container spacing={1} alignItems="stretch" justify="left" className={styles.container}>
             <Grid item spacing={1} xs={2}>
               <div>
-                <Typography>Available Staff: </Typography>
-                {getActive}
+                <Typography>Available: </Typography>
+                {StaffActive}
               </div>
             </Grid>
             <Grid item xs={1} alignItems="stretch">
@@ -176,14 +176,11 @@ export default function Course(props) {
             </Grid>
             <Grid item xs={2}>
               <div>
-                <Typography>Available Staff: </Typography>
-                {getActive}
+                <Typography>Occupied: </Typography>
+                {StaffOccupied}
               </div>
             </Grid>
-            <Grid item xs={3}>
-              {/* Arbitrary Button with Zoom Link Popup Dialog */}
-              <LaunchZoom />
-            </Grid>
+            <Grid item xs={2}></Grid>
             <Grid item xs={3}>
               {news}
             </Grid>
