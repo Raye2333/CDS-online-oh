@@ -15,6 +15,7 @@ class QuestionAttributes:
     time_posted = graphene.String(description="Time the question was submitted")
     time_started = graphene.String(description="Time the question was popped off queue")
     time_completed = graphene.String(description="Time the question was finished being answered")
+    question_topic = graphene.String(description="Topic of user's question")
     queue_pos = graphene.Int(description="Position in the queue of the question")
     zoom_link = graphene.String(description="Zoom link for the question")
 

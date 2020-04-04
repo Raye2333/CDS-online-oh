@@ -1,6 +1,6 @@
 from ast import literal_eval
 from database.model_questions import QuestionModel
-from database.model_users import UserModel
+from database.model_users import UserModel, CourseModel
 from database import base
 import logging
 import sys
@@ -18,7 +18,7 @@ if __name__ == '__main__':
     log.info('Create database {}'.format(base.db_name))
     base.Base.metadata.create_all(base.engine)
 
-    log.info('Insert Planet data in database')
+    log.info('Insert Question data in database')
     with open('database/dummy_data/questions.json', 'r') as f:
         data = literal_eval(f.read())
         for record in data:
@@ -32,4 +32,12 @@ if __name__ == '__main__':
         for record in data:
             user = UserModel(**record)
             base.db_session.add(user)
+        base.db_session.commit()
+    
+    log.info('Insert Course data in database')
+    with open('database/dummy_data/courses.json', 'r') as f:
+        data = literal_eval(f.read())
+        for record in data:
+            course = CourseModel(**record)
+            base.db_session.add(course)
         base.db_session.commit()

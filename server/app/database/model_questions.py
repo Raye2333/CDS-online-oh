@@ -10,9 +10,10 @@ class QuestionModel(Base):
 
     id = Column("id", Integer, primary_key=True)
     netid = Column("user_id", String, ForeignKey('user.netid'), nullable=False)
-    course_id = Column("course_id", Integer, nullable=False)
+    course_id = Column("course_id", Integer, ForeignKey('course.course_id'), nullable=False)
     time_posted = Column("time_posted", String)
     time_started = Column("time_started", String)
     time_completed = Column("time_completed", String)
+    question_topic = Column("question_topic", String)
     queue_pos = Column("queue_pos", Integer)
     zoom_link = Column("zoom_link", String)

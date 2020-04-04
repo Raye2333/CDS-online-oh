@@ -1,32 +1,35 @@
 [
-    {
-        "id": "1",
-        "netid": "mb2363",
-        "course_id": "1",
-        "time_posted": "2020-04-01 16:06:56.760967",
-        "time_started": "2020-04-01 16:06:56.760967",
-        "time_completed": "2020-04-01 16:11:56.760967",
-        "queue_pos": "-1",
-        "zoom_link": "cornell.zoom.us"
-    },
-    {
-        "id": "2",
-        "netid": "mb2363",
-        "course_id": "1",
-        "time_posted": "2020-04-01 16:15:56.760967",
-        "time_started": "2020-04-01 16:16:36.760967",
-        "time_completed": "NA",
-        "queue_pos": "0",
-        "zoom_link": "cornell.zoom.us"
-    },
-    {
-        "id": "3",
-        "netid": "cjw322",
-        "course_id": "1",
-        "time_posted": "2020-04-01 16:16:56.760967",
-        "time_started": "NA",
-        "time_completed": "NA",
-        "queue_pos": "1",
-        "zoom_link": "cornell.zoom.us"
-    }
+  {
+    "id": "1",
+    "netid": "mb2363",
+    "course_id": "10600",
+    "time_posted": "2020-04-01 16:06:56.760967",
+    "time_started": "2020-04-01 16:06:56.760967",
+    "time_completed": "2020-04-01 16:11:56.760967",
+    "question_topic": "help",
+    "queue_pos": "-1",
+    "zoom_link": "cornell.zoom.us"
+  },
+  {
+    "id": "2",
+    "netid": "mb2363",
+    "course_id": "10580",
+    "time_posted": "2020-04-01 16:15:56.760967",
+    "time_started": "2020-04-01 16:16:36.760967",
+    "time_completed": "NA",
+    "question_topic": "",
+    "queue_pos": "0",
+    "zoom_link": "cornell.zoom.us"
+  },
+  {
+    "id": "3",
+    "netid": "cjw322",
+    "course_id": "10712",
+    "time_posted": "2020-04-01 16:16:56.760967",
+    "time_started": "NA",
+    "time_completed": "NA",
+    "question_topic": "hello world",
+    "queue_pos": "1",
+    "zoom_link": "cornell.zoom.us"
+  }
 ]

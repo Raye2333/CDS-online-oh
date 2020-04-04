@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "course_id": "10712",
+    "course_name": "CS 1110",
+    "students": ["cjw322"],
+    "teaching_assistants": []
+  },
+  {
+    "id": "2",
+    "course_id": "10580",
+    "course_name": "CS 2110",
+    "students": ["mb2363"],
+    "teaching_assistants": ["hk592"]
+  },
+  {
+    "id": "3",
+    "course_id": "10600",
+    "course_name": "CS 2800",
+    "students": ["mb2363", "hk592"],
+    "teaching_assistants": ["jen67"]
+  }
+]
